@@ -15,7 +15,7 @@ if ( !defined( 'ABSPATH' ) ) {
 }
 class WPS_Limit_Search_Results {
 
-	public static $results_limit = 3;
+	public static $results_limit = 500;
 
 	public static function init() {
 		add_filter( 'woocommerce_product_search_engine_stage_parameters', array( __CLASS__, 'woocommerce_product_search_engine_stage_parameters' ), 10, 2 );
