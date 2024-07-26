@@ -28,10 +28,8 @@ class WPS_Limit_Search_Results {
 				isset( $_REQUEST['ixwps'] ) &&
 				$_REQUEST['ixwps']
 			) {
-				error_log( 'search term' );
-				error_log( $_REQUEST['s'] );
 				$stage_id = $engine_stage->get_stage_id();
-				if ( $stage_id == 'pagination' ) {
+				if ( $stage_id === 'pagination' ) {
 					if ( is_array( $args ) ) {
 						if ( isset( $args['limit'] ) ) {
 							$args['limit'] = self::$results_limit;
