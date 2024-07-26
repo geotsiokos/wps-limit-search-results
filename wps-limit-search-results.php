@@ -21,17 +21,29 @@ class WPS_Limit_Search_Results {
 		add_filter( 'woocommerce_product_search_engine_stage_parameters', array( __CLASS__, 'woocommerce_product_search_engine_stage_parameters' ), 10, 2 );
 	}
 
-	public static function woocommerce_product_search_engine_stage_parameters( $args, $engine ) {
+	public static function woocommerce_product_search_engine_stage_parameters( $args, $engine_stage ) {
 		if ( !is_ajax() ) {
-			if ( is_array( $args ) ) {
-				if ( isset( $args['limit'] ) ) {
-					$args['limit'] = self::$results_limit;
-				}
-				if ( isset( $args['offset'] ) ) {
-					$args['offset'] = 0;
+			if (
+				isset( $_REQUEST ) &&
+				isset( $_REQUEST['ixwps'] ) &&
+				$_REQUEST['ixwps']
+			) {
+				error_log( 'search term' );
+				error_log( $_REQUEST['s'] );
+				$stage_id = $engine_stage->get_stage_id();
+				if ( $stage_id == 'pagination' ) {
+					if ( is_array( $args ) ) {
+						if ( isset( $args['limit'] ) ) {
+							$args['limit'] = self::$results_limit;
+						}
+						if ( isset( $args['offset'] ) ) {
+							$args['offset'] = 0;
+						}
+					}
 				}
 			}
 		}
+
 		return $args;
 	}
 
