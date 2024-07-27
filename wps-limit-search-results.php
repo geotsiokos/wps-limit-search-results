@@ -31,10 +31,10 @@ class WPS_Limit_Search_Results {
 				$stage_id = $engine_stage->get_stage_id();
 				if ( $stage_id === 'pagination' ) {
 					if ( is_array( $args ) ) {
-						if ( isset( $args['limit'] ) ) {
+						if ( empty( $args['limit'] ) ) {
 							$args['limit'] = self::$results_limit;
 						}
-						if ( isset( $args['offset'] ) ) {
+						if ( empty( $args['offset'] ) ) {
 							$args['offset'] = 0;
 						}
 					}
